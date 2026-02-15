@@ -1872,8 +1872,307 @@ async function main() {
       confidence_level: 'verified'
     }
   ];
+  // OILS - 2 ingredients
+  const oils = [
+    {
+      name: 'Vegetable Oil',
+      category: 'oil',
+      description: 'Neutral-flavored refined oil (soybean, canola, or blend), creates tender texture in cakes and quick breads.',
+      water_content_pct: 0.0,
+      protein_content_pct: 0.0,
+      fat_content_pct: 100.0,
+      starch_content_pct: 0.0,
+      sugar_content_pct: 0.0,
+      fiber_content_pct: 0.0,
+      ph_level_min: 7.0,
+      ph_level_max: 7.0,
+      density_g_per_ml: 0.92,
+      standard_measurement_unit: 'volume',
+      gluten_forming: false,
+      emulsifying: false,
+      leavening_type: null,
+      hygroscopic: false,
+      typical_hydration_ratio: null,
+      flavor_profile: ['neutral', 'clean', 'mild'],
+      primary_function: 'Tenderizes crumb by coating flour proteins (preventing gluten formation), adds moisture, carries fat-soluble flavors.',
+      interactions: [
+        { ingredient: 'flour', effect: 'Coats proteins, inhibits gluten development', notes: 'Creates tender cakes vs. chewy breads' },
+        { ingredient: 'sugar', effect: 'Helps dissolve and distribute sugar', notes: 'Oil cakes stay moist longer' },
+        { ingredient: 'eggs', effect: 'Emulsifies with egg proteins', notes: 'Creates smooth batter' },
+        { ingredient: 'cocoa', effect: 'Helps bloom chocolate flavor', notes: 'Fat-soluble compounds extracted' }
+      ],
+      substitution_ratio: [
+        { substitute: 'melted butter', ratio: '1:1', notes: 'Adds flavor, similar moisture' },
+        { substitute: 'applesauce', ratio: '1:1', notes: 'Lower fat, denser texture' },
+        { substitute: 'olive oil', ratio: '1:1', notes: 'Adds fruity flavor' }
+      ],
+      temperature_sensitivity: 'Smoke point ~400-450°F (204-232°C), well above baking temps. Does not solidify like butter at room temp, keeping cakes moist. Neutral flavor won\'t compete with other ingredients. Typical use: 1/4-1/2 cup per batch in cakes.',
+      source_notes: 'USDA FoodData Central (FDC ID: 171028), food science consensus',
+      confidence_level: 'verified'
+    },
+    {
+      name: 'Extra Virgin Olive Oil',
+      category: 'oil',
+      description: 'Fruity, robust oil from pressed olives, adds distinct flavor to Mediterranean and savory baked goods.',
+      water_content_pct: 0.0,
+      protein_content_pct: 0.0,
+      fat_content_pct: 100.0,
+      starch_content_pct: 0.0,
+      sugar_content_pct: 0.0,
+      fiber_content_pct: 0.0,
+      ph_level_min: 6.5,
+      ph_level_max: 7.5,
+      density_g_per_ml: 0.91,
+      standard_measurement_unit: 'volume',
+      gluten_forming: false,
+      emulsifying: false,
+      leavening_type: null,
+      hygroscopic: false,
+      typical_hydration_ratio: null,
+      flavor_profile: ['fruity', 'peppery', 'grassy', 'robust', 'complex'],
+      primary_function: 'Adds fruity flavor and tender texture, especially in olive oil cakes, focaccia, and Mediterranean desserts.',
+      interactions: [
+        { ingredient: 'citrus', effect: 'Complements lemon, orange flavors', notes: 'Olive oil lemon cake classic' },
+        { ingredient: 'herbs', effect: 'Enhances rosemary, thyme, basil', notes: 'Savory focaccia, herb breads' },
+        { ingredient: 'flour', effect: 'Tenderizes by coating proteins', notes: 'Same mechanism as other oils' },
+        { ingredient: 'sugar', effect: 'Balances fruity bitterness', notes: 'Sweetness mellows peppery notes' }
+      ],
+      substitution_ratio: [
+        { substitute: 'vegetable oil', ratio: '1:1', notes: 'Neutral flavor instead of fruity' },
+        { substitute: 'melted butter', ratio: '1:1', notes: 'Richer, less fruity' }
+      ],
+      temperature_sensitivity: 'Smoke point ~350-410°F (177-210°C) depending on quality. Extra virgin can smoke at lower temps than refined oils. Flavor compounds can turn bitter if overheated. Best in cakes baked at 350°F or lower. Typical use: 1/3-1/2 cup per batch.',
+      source_notes: 'USDA FoodData Central (FDC ID: 171413), Mediterranean baking tradition',
+      confidence_level: 'verified'
+    }
+  ];
+
+  // NUTS - 2 ingredients
+  const nuts = [
+    {
+      name: 'Almond Flour',
+      category: 'nut',
+      description: 'Finely ground blanched almonds, gluten-free flour alternative high in fat and protein.',
+      water_content_pct: 4.7,
+      protein_content_pct: 21.4,
+      fat_content_pct: 55.0,
+      starch_content_pct: 0.0,
+      sugar_content_pct: 4.4,
+      fiber_content_pct: 10.0,
+      ph_level_min: 6.0,
+      ph_level_max: 6.5,
+      density_g_per_ml: 0.48,
+      standard_measurement_unit: 'weight',
+      gluten_forming: false,
+      emulsifying: false,
+      leavening_type: null,
+      hygroscopic: true,
+      typical_hydration_ratio: null,
+      flavor_profile: ['nutty', 'sweet', 'mild', 'rich'],
+      primary_function: 'Gluten-free flour substitute, adds moisture and richness from high fat content, creates tender, dense texture.',
+      interactions: [
+        { ingredient: 'eggs', effect: 'Eggs provide structure (no gluten)', notes: 'Macarons use almond flour + egg whites only' },
+        { ingredient: 'sugar', effect: 'Sweetness complements nuttiness', notes: 'Financiers, frangipane' },
+        { ingredient: 'butter', effect: 'Fat-on-fat creates ultra-tender texture', notes: 'Almond cakes very rich' },
+        { ingredient: 'leavening', effect: 'Needs more leavening than wheat flour', notes: 'No gluten = less structure to trap CO2' }
+      ],
+      substitution_ratio: [
+        { substitute: 'all-purpose flour', ratio: '1:1 by weight (not volume)', notes: 'Add extra egg for structure' },
+        { substitute: 'hazelnut flour', ratio: '1:1', notes: 'Similar fat/protein, different flavor' }
+      ],
+      temperature_sensitivity: 'High fat content means faster browning - watch oven temp. Typical use: 1-2 cups per batch. Absorbs less liquid than wheat flour due to no gluten. Store refrigerated to prevent rancidity from oils. Blanched (skinless) produces finer texture than almond meal (with skins).',
+      source_notes: 'USDA FoodData Central (FDC ID: 170567), gluten-free baking consensus',
+      confidence_level: 'verified'
+    },
+    {
+      name: 'Chopped Walnuts',
+      category: 'nut',
+      description: 'Coarsely chopped walnut pieces, adds crunch, rich flavor, and omega-3 fats to baked goods.',
+      water_content_pct: 4.1,
+      protein_content_pct: 15.2,
+      fat_content_pct: 65.2,
+      starch_content_pct: 0.0,
+      sugar_content_pct: 2.6,
+      fiber_content_pct: 6.7,
+      ph_level_min: 5.5,
+      ph_level_max: 6.5,
+      density_g_per_ml: 0.50,
+      standard_measurement_unit: 'weight',
+      gluten_forming: false,
+      emulsifying: false,
+      leavening_type: null,
+      hygroscopic: false,
+      typical_hydration_ratio: null,
+      flavor_profile: ['nutty', 'earthy', 'slightly bitter', 'rich'],
+      primary_function: 'Adds crunchy texture, nutty flavor, and richness. Toasting enhances flavor and aroma.',
+      interactions: [
+        { ingredient: 'banana', effect: 'Classic pairing in banana bread', notes: 'Sweetness balances walnut bitterness' },
+        { ingredient: 'chocolate', effect: 'Nutty richness complements chocolate', notes: 'Brownies, chocolate chip cookies' },
+        { ingredient: 'cinnamon', effect: 'Warm spice enhances nutty flavor', notes: 'Coffee cakes, cinnamon rolls' },
+        { ingredient: 'maple', effect: 'Sweetness complements earthy notes', notes: 'Maple walnut bread, cookies' }
+      ],
+      substitution_ratio: [
+        { substitute: 'pecans', ratio: '1:1', notes: 'Sweeter, less bitter' },
+        { substitute: 'almonds', ratio: '1:1', notes: 'Milder flavor, firmer texture' },
+        { substitute: 'chocolate chips', ratio: '1:1', notes: 'Completely different flavor, similar textural contrast' }
+      ],
+      temperature_sensitivity: 'Toast at 350°F for 8-10 minutes to enhance flavor. High fat means can burn quickly - add partway through baking if crust browns too fast. Typical use: 1/2-1 cup per batch. Store refrigerated or frozen to prevent rancidity.',
+      source_notes: 'USDA FoodData Central (FDC ID: 170187), culinary tradition',
+      confidence_level: 'verified'
+    }
+  ];
+
+  // THICKENERS - 2 ingredients
+  const thickeners = [
+    {
+      name: 'Unflavored Gelatin',
+      category: 'thickener',
+      description: 'Protein derived from animal collagen, sets liquids into gels, stabilizes mousses and creams.',
+      water_content_pct: 13.0,
+      protein_content_pct: 85.6,
+      fat_content_pct: 0.1,
+      starch_content_pct: 0.0,
+      sugar_content_pct: 0.0,
+      fiber_content_pct: 0.0,
+      ph_level_min: 6.0,
+      ph_level_max: 7.0,
+      density_g_per_ml: 0.70,
+      standard_measurement_unit: 'weight',
+      gluten_forming: false,
+      emulsifying: false,
+      leavening_type: null,
+      hygroscopic: true,
+      typical_hydration_ratio: null,
+      flavor_profile: ['neutral', 'odorless'],
+      primary_function: 'Creates gel structure by forming protein network when cooled, stabilizes foams and emulsions.',
+      interactions: [
+        { ingredient: 'liquid', effect: 'Blooms (hydrates) in cold liquid, dissolves in hot liquid', notes: '1 envelope (7g) sets 2 cups liquid' },
+        { ingredient: 'acid', effect: 'Acid weakens gel strength', notes: 'Use extra gelatin with citrus' },
+        { ingredient: 'fresh pineapple/kiwi', effect: 'Enzymes prevent gelling', notes: 'Use canned fruit (heat denatures enzymes)' },
+        { ingredient: 'sugar', effect: 'High sugar can interfere with gel formation', notes: 'Adjust gelatin amount' }
+      ],
+      substitution_ratio: [
+        { substitute: 'agar agar', ratio: '1:1 by weight', notes: 'Vegan, sets firmer, at room temp' },
+        { substitute: 'pectin', ratio: '1:1', notes: 'Plant-based, needs sugar and acid' }
+      ],
+      temperature_sensitivity: 'Blooms in cold water 5-10 min. Dissolves in liquid above 122°F (50°C). Sets when cooled below 59°F (15°C). Melts again if reheated above 95°F (35°C). 1 envelope (7g/2.5 tsp) = 1 tbsp. Typical use: 1-2 envelopes per batch for mousses, panna cotta.',
+      source_notes: 'USDA FoodData Central (FDC ID: 169599), food science consensus',
+      confidence_level: 'verified'
+    },
+    {
+      name: 'Agar Agar Powder',
+      category: 'thickener',
+      description: 'Plant-based gelling agent from seaweed, vegan gelatin alternative, sets at room temperature.',
+      water_content_pct: 10.0,
+      protein_content_pct: 6.2,
+      fat_content_pct: 0.3,
+      starch_content_pct: 0.0,
+      sugar_content_pct: 0.0,
+      fiber_content_pct: 80.0,
+      ph_level_min: 6.5,
+      ph_level_max: 7.5,
+      density_g_per_ml: 0.60,
+      standard_measurement_unit: 'weight',
+      gluten_forming: false,
+      emulsifying: false,
+      leavening_type: null,
+      hygroscopic: true,
+      typical_hydration_ratio: null,
+      flavor_profile: ['neutral', 'odorless'],
+      primary_function: 'Creates firm gel structure, vegan alternative to gelatin, stabilizes desserts and glazes.',
+      interactions: [
+        { ingredient: 'liquid', effect: 'Dissolves in boiling liquid, sets when cooled to room temp', notes: '1 tsp sets 1 cup liquid' },
+        { ingredient: 'acid', effect: 'Stable in acidic conditions (unlike gelatin)', notes: 'Great for citrus desserts' },
+        { ingredient: 'fruit enzymes', effect: 'Not affected by fresh pineapple/kiwi', notes: 'Can use fresh tropical fruits' },
+        { ingredient: 'sugar', effect: 'Less affected by sugar than gelatin', notes: 'More forgiving ratios' }
+      ],
+      substitution_ratio: [
+        { substitute: 'gelatin', ratio: '1:8', notes: 'Use 1 tsp agar per 8 tsp (2.5 envelopes) gelatin' },
+        { substitute: 'pectin', ratio: '1:1', notes: 'Different texture, needs sugar/acid' }
+      ],
+      temperature_sensitivity: 'Must boil (212°F/100°C) to fully dissolve. Sets at 90-104°F (32-40°C), much higher than gelatin (59°F). Sets firmer and more brittle than gelatin. Does not melt at room temp once set. Typical use: 1-2 tsp per cup liquid. Powder form most common (flakes and bars also available).',
+      source_notes: 'Food science consensus, vegan baking resources, seaweed extract properties',
+      confidence_level: 'verified'
+    }
+  ];
+
+  // SYRUPS - 2 ingredients (moving honey and molasses from conceptual to actual)
+  const syrups = [
+    {
+      name: 'Honey',
+      category: 'syrup',
+      description: 'Natural sweetener from bees, contains fructose/glucose, hygroscopic (retains moisture), adds flavor and color.',
+      water_content_pct: 17.1,
+      protein_content_pct: 0.3,
+      fat_content_pct: 0.0,
+      starch_content_pct: 0.0,
+      sugar_content_pct: 82.1,
+      fiber_content_pct: 0.2,
+      ph_level_min: 3.4,
+      ph_level_max: 6.1,
+      density_g_per_ml: 1.42,
+      standard_measurement_unit: 'volume',
+      gluten_forming: false,
+      emulsifying: false,
+      leavening_type: null,
+      hygroscopic: true,
+      typical_hydration_ratio: null,
+      flavor_profile: ['sweet', 'floral', 'complex', 'variable by flower source'],
+      primary_function: 'Sweetens and adds moisture retention, contributes to browning, adds subtle floral notes, keeps baked goods soft.',
+      interactions: [
+        { ingredient: 'baking soda', effect: 'Acidic honey activates baking soda', notes: 'Contributes to leavening' },
+        { ingredient: 'flour', effect: 'Hygroscopic - pulls moisture from flour', notes: 'Keeps cakes moist for days' },
+        { ingredient: 'eggs', effect: 'Emulsifies well with eggs', notes: 'Smooth batters' },
+        { ingredient: 'heat', effect: 'Caramelizes and darkens rapidly', notes: 'Honey cakes brown faster than sugar cakes' }
+      ],
+      substitution_ratio: [
+        { substitute: 'sugar', ratio: '1:1.25', notes: 'Use 1 cup honey = 1.25 cups sugar, reduce liquid by 1/4 cup' },
+        { substitute: 'maple syrup', ratio: '1:1', notes: 'Similar moisture, different flavor' },
+        { substitute: 'agave nectar', ratio: '1:1', notes: 'Milder flavor, similar properties' }
+      ],
+      temperature_sensitivity: 'Caramelizes and darkens at lower temps than sugar. Reduce oven temp by 25°F when substituting for sugar. Antibacterial properties. Never feed to infants <1 year (botulism risk). Typical use: 1/4-1/2 cup per batch.',
+      source_notes: 'USDA FoodData Central (FDC ID: 169640), food science consensus',
+      confidence_level: 'verified'
+    },
+    {
+      name: 'Molasses',
+      category: 'syrup',
+      description: 'Dark, thick syrup from sugar refining, adds moisture, deep flavor, and promotes browning.',
+      water_content_pct: 21.9,
+      protein_content_pct: 0.0,
+      fat_content_pct: 0.1,
+      starch_content_pct: 0.0,
+      sugar_content_pct: 74.7,
+      fiber_content_pct: 0.0,
+      ph_level_min: 5.0,
+      ph_level_max: 6.0,
+      density_g_per_ml: 1.40,
+      standard_measurement_unit: 'volume',
+      gluten_forming: false,
+      emulsifying: false,
+      leavening_type: null,
+      hygroscopic: true,
+      typical_hydration_ratio: null,
+      flavor_profile: ['robust', 'slightly bitter', 'caramel', 'complex', 'earthy'],
+      primary_function: 'Adds dark color, complex flavor, moisture retention, and acidity for activating baking soda.',
+      interactions: [
+        { ingredient: 'baking soda', effect: 'Acidity activates baking soda', notes: 'Classic gingerbread leavening' },
+        { ingredient: 'ginger', effect: 'Complements warm spices', notes: 'Gingerbread, spice cookies' },
+        { ingredient: 'flour', effect: 'Hygroscopic - retains moisture', notes: 'Keeps cookies soft and chewy' },
+        { ingredient: 'heat', effect: 'Promotes rapid browning', notes: 'Dark crust on gingerbread' }
+      ],
+      substitution_ratio: [
+        { substitute: 'honey', ratio: '1:1', notes: 'Milder flavor, lighter color' },
+        { substitute: 'maple syrup', ratio: '1:1', notes: 'Less robust, different flavor' },
+        { substitute: 'dark corn syrup', ratio: '1:1', notes: 'Less flavor complexity' }
+      ],
+      temperature_sensitivity: 'High mineral content (iron, calcium) promotes rapid browning. Light molasses mild, dark molasses robust, blackstrap very bitter (avoid in baking). Typical use: 1/4-1/2 cup per batch in gingerbread, cookies.',
+      source_notes: 'USDA FoodData Central (FDC ID: 169676), food science consensus',
+      confidence_level: 'verified'
+    }
+  ];
   // Combine all ingredients
-  const allIngredients = [...flours, ...eggs, ...fats, ...sugars, ...leaveners, ...liquids, ...salts, ...starches, ...chocolates, ...dairy, ...extracts, ...acids, ...spices];
+  const allIngredients = [...flours, ...eggs, ...fats, ...sugars, ...leaveners, ...liquids, ...salts, ...starches, ...chocolates, ...dairy, ...extracts, ...acids, ...spices, ...oils, ...nuts, ...thickeners, ...syrups];
 
   // Insert ingredients
   for (const ingredient of allIngredients) {
@@ -1894,6 +2193,10 @@ async function main() {
   console.log(`   - ${extracts.length} extracts`);
   console.log(`   - ${acids.length} acids`);
   console.log(`   - ${spices.length} spices`);
+  console.log(`   - ${oils.length} oils`);
+  console.log(`   - ${nuts.length} nuts`);
+  console.log(`   - ${thickeners.length} thickeners`);
+  console.log(`   - ${syrups.length} syrups`);
 }
 
 main()
