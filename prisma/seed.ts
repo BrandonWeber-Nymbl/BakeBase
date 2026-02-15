@@ -1718,8 +1718,162 @@ async function main() {
     }
   ];
 
+  // ACIDS - 2 ingredients
+  const acids = [
+    {
+      name: 'White Vinegar',
+      category: 'acid',
+      description: 'Diluted acetic acid (5-7%), provides acidity to activate baking soda and tenderize gluten.',
+      water_content_pct: 94.0,
+      protein_content_pct: 0.0,
+      fat_content_pct: 0.0,
+      starch_content_pct: 0.0,
+      sugar_content_pct: 0.0,
+      fiber_content_pct: 0.0,
+      ph_level_min: 2.4,
+      ph_level_max: 2.6,
+      density_g_per_ml: 1.01,
+      standard_measurement_unit: 'volume',
+      gluten_forming: false,
+      emulsifying: false,
+      leavening_type: null,
+      hygroscopic: false,
+      typical_hydration_ratio: null,
+      flavor_profile: ['sour', 'sharp', 'acidic', 'clean'],
+      primary_function: 'Provides acidity to activate baking soda (CO2 production), tenderizes gluten, adds tanginess.',
+      interactions: [
+        { ingredient: 'baking soda', effect: 'Reacts to produce CO2 gas for leavening', notes: '1 tsp baking soda needs ~1 tbsp acid' },
+        { ingredient: 'flour', effect: 'Weakens gluten bonds, creates tender crumb', notes: 'Especially useful in cakes and quick breads' },
+        { ingredient: 'dairy', effect: 'Can curdle milk proteins', notes: 'Creates vegan "buttermilk": 1 tbsp vinegar + 1 cup milk' },
+        { ingredient: 'eggs', effect: 'Denatures proteins, stabilizes meringues', notes: 'Small amount aids egg white whipping' }
+      ],
+      substitution_ratio: [
+        { substitute: 'lemon juice', ratio: '1:1', notes: 'Similar acidity, adds citrus flavor' },
+        { substitute: 'cream of tartar', ratio: '2:1', notes: 'Use 2 tsp cream of tartar per 1 tbsp vinegar' },
+        { substitute: 'buttermilk', ratio: '1:8', notes: '1 tbsp vinegar ≈ 1 cup buttermilk for acidity' }
+      ],
+      temperature_sensitivity: 'Acetic acid (boiling point 244°F/118°C) partially evaporates during baking, reducing tanginess. Reaction with baking soda is immediate and releases CO2 quickly, so mix just before baking. In cakes, creates tender crumb by preventing excessive gluten development.',
+      source_notes: 'Food chemistry consensus, typical use 1-2 tbsp per batch for leavening or flavor',
+      confidence_level: 'verified'
+    },
+    {
+      name: 'Lemon Juice',
+      category: 'acid',
+      description: 'Fresh or bottled citric acid solution (~5-6%), provides tartness and activates baking soda.',
+      water_content_pct: 92.0,
+      protein_content_pct: 0.4,
+      fat_content_pct: 0.2,
+      starch_content_pct: 0.0,
+      sugar_content_pct: 2.5,
+      fiber_content_pct: 0.0,
+      ph_level_min: 2.0,
+      ph_level_max: 2.6,
+      density_g_per_ml: 1.03,
+      standard_measurement_unit: 'volume',
+      gluten_forming: false,
+      emulsifying: false,
+      leavening_type: null,
+      hygroscopic: false,
+      typical_hydration_ratio: null,
+      flavor_profile: ['citrus', 'tart', 'bright', 'fresh', 'acidic'],
+      primary_function: 'Provides acidity for leavening with baking soda, adds citrus flavor, tenderizes gluten, prevents oxidation.',
+      interactions: [
+        { ingredient: 'baking soda', effect: 'Rapid CO2 production for leavening', notes: '1 tsp baking soda needs ~1-2 tbsp lemon juice' },
+        { ingredient: 'flour', effect: 'Weakens gluten, creates tender texture', notes: 'Especially useful in lemon cakes and scones' },
+        { ingredient: 'fruit', effect: 'Prevents enzymatic browning', notes: 'Keeps apples, pears from oxidizing' },
+        { ingredient: 'dairy', effect: 'Curdles milk to create vegan buttermilk', notes: '1 tbsp lemon juice + 1 cup milk, let sit 5 min' },
+        { ingredient: 'sugar', effect: 'Balances sweetness with acidity', notes: 'Lemon bars, lemon meringue pie' }
+      ],
+      substitution_ratio: [
+        { substitute: 'white vinegar', ratio: '1:1', notes: 'Same acidity, less flavor complexity' },
+        { substitute: 'lime juice', ratio: '1:1', notes: 'Similar acidity, different citrus profile' },
+        { substitute: 'citric acid powder', ratio: '1/4 tsp powder = 1 tbsp juice', notes: 'Dissolve in water' }
+      ],
+      temperature_sensitivity: 'Citric acid stable at baking temps. Volatile citrus oils provide fresh aroma but degrade with prolonged heat. Fresh juice preferred over bottled for maximum flavor. Typical use: 1-3 tbsp per batch for leavening or flavor.',
+      source_notes: 'USDA FoodData Central (FDC ID: 167747), food science consensus',
+      confidence_level: 'verified'
+    }
+  ];
+
+  // SPICES - 2 ingredients
+  const spices = [
+    {
+      name: 'Ground Cinnamon',
+      category: 'spice',
+      description: 'Dried, ground bark of cinnamon tree, adds warmth and sweetness to baked goods.',
+      water_content_pct: 10.0,
+      protein_content_pct: 4.0,
+      fat_content_pct: 1.2,
+      starch_content_pct: 0.0,
+      sugar_content_pct: 2.2,
+      fiber_content_pct: 53.1,
+      ph_level_min: 5.0,
+      ph_level_max: 6.0,
+      density_g_per_ml: 0.56,
+      standard_measurement_unit: 'volume',
+      gluten_forming: false,
+      emulsifying: false,
+      leavening_type: null,
+      hygroscopic: true,
+      typical_hydration_ratio: null,
+      flavor_profile: ['warm', 'sweet', 'spicy', 'aromatic', 'woody'],
+      primary_function: 'Provides warm, sweet flavor and aroma, enhances perception of sweetness, complements fruit and chocolate.',
+      interactions: [
+        { ingredient: 'sugar', effect: 'Amplifies perceived sweetness', notes: 'Allows sugar reduction by 10-15%' },
+        { ingredient: 'fruit', effect: 'Classic pairing with apples, pears, stone fruits', notes: 'Apple pie, peach cobbler' },
+        { ingredient: 'chocolate', effect: 'Adds complexity to chocolate desserts', notes: 'Cinnamon brownies, Mexican hot chocolate' },
+        { ingredient: 'dairy', effect: 'Mellows in cream-based preparations', notes: 'Cinnamon rolls, horchata' },
+        { ingredient: 'yeast', effect: 'No interference with fermentation', notes: 'Safe for cinnamon rolls, babka' }
+      ],
+      substitution_ratio: [
+        { substitute: 'cinnamon stick', ratio: '1 stick = 1/2 tsp ground', notes: 'Infuse in liquids, remove before baking' },
+        { substitute: 'allspice', ratio: '1:1', notes: 'Different but compatible warm spice' },
+        { substitute: 'cardamom', ratio: '1:2', notes: 'Use half as much, more intense' }
+      ],
+      temperature_sensitivity: 'Cinnamaldehyde (main compound) stable at baking temps. Volatile oils can dissipate with prolonged heat. Typical use: 1-3 tsp per batch. Ceylon cinnamon sweeter, milder than Cassia. Adds no significant moisture or structure.',
+      source_notes: 'USDA FoodData Central (FDC ID: 171320), culinary tradition',
+      confidence_level: 'verified'
+    },
+    {
+      name: 'Ground Nutmeg',
+      category: 'spice',
+      description: 'Dried, ground seed of nutmeg tree, adds warm, sweet, slightly medicinal flavor.',
+      water_content_pct: 6.2,
+      protein_content_pct: 5.8,
+      fat_content_pct: 36.3,
+      starch_content_pct: 0.0,
+      sugar_content_pct: 2.9,
+      fiber_content_pct: 20.8,
+      ph_level_min: 5.5,
+      ph_level_max: 6.5,
+      density_g_per_ml: 0.45,
+      standard_measurement_unit: 'volume',
+      gluten_forming: false,
+      emulsifying: false,
+      leavening_type: null,
+      hygroscopic: true,
+      typical_hydration_ratio: null,
+      flavor_profile: ['warm', 'sweet', 'nutty', 'slightly bitter', 'aromatic'],
+      primary_function: 'Provides warm, complex flavor, complements dairy and egg-based desserts, enhances spice blends.',
+      interactions: [
+        { ingredient: 'dairy', effect: 'Classic pairing with cream, milk, custard', notes: 'Eggnog, crème brûlée, rice pudding' },
+        { ingredient: 'eggs', effect: 'Enhances custard flavor', notes: 'Pumpkin pie, bread pudding' },
+        { ingredient: 'cinnamon', effect: 'Complementary spice pairing', notes: 'Often used together in fall desserts' },
+        { ingredient: 'vanilla', effect: 'Enhances vanilla sweetness', notes: 'Snickerdoodles, sugar cookies' },
+        { ingredient: 'fruit', effect: 'Complements pumpkin, sweet potato, apple', notes: 'Pumpkin pie, sweet potato casserole' }
+      ],
+      substitution_ratio: [
+        { substitute: 'mace', ratio: '1:1', notes: 'Mace is nutmeg outer coating, similar flavor' },
+        { substitute: 'allspice', ratio: '1:1', notes: 'Different but compatible' },
+        { substitute: 'cinnamon', ratio: '1:2', notes: 'Use double cinnamon, less complex' }
+      ],
+      temperature_sensitivity: 'Myristicin (main compound) stable at baking temps. Very potent - use sparingly (1/4-1/2 tsp per batch). Freshly grated nutmeg more aromatic than pre-ground. Adds minimal moisture. High fat content but used in such small quantities it does not affect texture.',
+      source_notes: 'USDA FoodData Central (FDC ID: 170931), culinary tradition',
+      confidence_level: 'verified'
+    }
+  ];
   // Combine all ingredients
-  const allIngredients = [...flours, ...eggs, ...fats, ...sugars, ...leaveners, ...liquids, ...salts, ...starches, ...chocolates, ...dairy, ...extracts];
+  const allIngredients = [...flours, ...eggs, ...fats, ...sugars, ...leaveners, ...liquids, ...salts, ...starches, ...chocolates, ...dairy, ...extracts, ...acids, ...spices];
 
   // Insert ingredients
   for (const ingredient of allIngredients) {
@@ -1738,6 +1892,8 @@ async function main() {
   console.log(`   - ${chocolates.length} chocolates`);
   console.log(`   - ${dairy.length} dairy products`);
   console.log(`   - ${extracts.length} extracts`);
+  console.log(`   - ${acids.length} acids`);
+  console.log(`   - ${spices.length} spices`);
 }
 
 main()
