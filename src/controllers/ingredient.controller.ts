@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
 import { ChemistryService } from '../services/chemistry.service';
-import { ApiResponse, IngredientInput, Meta } from '../types';
+import { ApiResponse, Meta } from '../types';
 import { z } from 'zod';
 
 const prisma = new PrismaClient();
@@ -21,7 +21,7 @@ export class IngredientController {
    * GET /ingredients
    * List all ingredients with optional filtering
    */
-  static async getAll(req: Request, res: Response) {
+  static async getAll(req: Request, res: Response): Promise<any> {
     try {
       const { category, function: funcFilter } = req.query;
 
@@ -74,7 +74,7 @@ export class IngredientController {
    * GET /ingredients/:id
    * Get a single ingredient by ID
    */
-  static async getById(req: Request, res: Response) {
+  static async getById(req: Request, res: Response): Promise<any> {
     try {
       const { id } = req.params;
 
@@ -127,7 +127,7 @@ export class IngredientController {
    * GET /ingredients/search?q=
    * Fuzzy search by name or function
    */
-  static async search(req: Request, res: Response) {
+  static async search(req: Request, res: Response): Promise<any> {
     try {
       const { q } = req.query;
 
@@ -186,7 +186,7 @@ export class IngredientController {
    * POST /ingredients/combine
    * Combine ingredients and analyze chemistry
    */
-  static async combine(req: Request, res: Response) {
+  static async combine(req: Request, res: Response): Promise<any> {
     try {
       // Validate input
       const validation = combineSchema.safeParse(req.body);

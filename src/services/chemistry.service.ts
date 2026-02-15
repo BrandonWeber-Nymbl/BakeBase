@@ -1,4 +1,3 @@
-import { Ingredient } from '@prisma/client';
 import { IngredientInput, CombinedAnalysis } from '../types';
 
 export class ChemistryService {
@@ -7,7 +6,7 @@ export class ChemistryService {
    */
   static analyzeCombination(
     inputs: IngredientInput[],
-    ingredients: Ingredient[]
+    ingredients: any[]
   ): CombinedAnalysis {
     const totalWeight = inputs.reduce((sum, input) => sum + input.quantity_g, 0);
 
@@ -45,11 +44,13 @@ export class ChemistryService {
       totalStarch += (ingredient.starch_content_pct || 0) * fraction;
 
       // Track pH range
-      if (ingredient.ph_level_min !== null) {
-        minPH = minPH === null ? ingredient.ph_level_min : Math.min(minPH, ingredient.ph_level_min);
+      if (ingredient.ph_level_min !== null && ingredient.ph_level_min !== undefined) {
+        const phMin = ingredient.ph_level_min as number;
+        minPH = minPH === null ? phMin : Math.min(minPH, phMin);
       }
-      if (ingredient.ph_level_max !== null) {
-        maxPH = maxPH === null ? ingredient.ph_level_max : Math.max(maxPH, ingredient.ph_level_max);
+      if (ingredient.ph_level_max !== null && ingredient.ph_level_max !== undefined) {
+        const phMax = ingredient.ph_level_max as number;
+        maxPH = maxPH === null ? phMax : Math.max(maxPH, phMax);
       }
 
       // Classify ingredients
@@ -163,15 +164,18 @@ export class ChemistryService {
       else phEnv = 'neutral';
     }
 
-    const phEnvironment = minPH !== null && maxPH !== null
-      ? `pH range ${minPH.toFixed(1)}-${maxPH.toFixed(1)} (${phEnv}). ${
-          phEnv === 'acidic'
-            ? 'Acidic environment enhances baking soda leavening, may tenderize gluten slightly.'
-            : phEnv === 'alkaline'
-            ? 'Alkaline environment accelerates browning (Maillard reaction), may weaken gluten.'
-            : 'Neutral pH, standard baking environment.'
-        }`
-      : 'pH data not available for all ingredients.';
+    let phEnvironment = 'pH data not available for all ingredients.';
+    if (minPH !== null && maxPH !== null) {
+      const phMin = minPH as number;
+      const phMax = maxPH as number;
+      phEnvironment = `pH range ${phMin.toFixed(1)}-${phMax.toFixed(1)} (${phEnv}). ${
+        phEnv === 'acidic'
+          ? 'Acidic environment enhances baking soda leavening, may tenderize gluten slightly.'
+          : phEnv === 'alkaline'
+          ? 'Alkaline environment accelerates browning (Maillard reaction), may weaken gluten.'
+          : 'Neutral pH, standard baking environment.'
+      }`;
+    }
 
     // Generate plain-language prediction
     const prediction = this.generatePrediction({
@@ -254,7 +258,6 @@ export class ChemistryService {
     ingredients_used: Array<{ name: string; quantity_g: number; percentage_of_total: number }>;
   }): string {
     const {
-      hydrationAssessment,
       hydrationRatio,
       flourWeight,
       totalWeight,
@@ -264,8 +267,7 @@ export class ChemistryService {
       totalFat,
       totalSugar,
       phEnv,
-      textureProfile,
-      ingredients_used
+      textureProfile
     } = context;
 
     let prediction = '';

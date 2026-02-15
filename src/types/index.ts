@@ -1,5 +1,3 @@
-import { Ingredient } from '@prisma/client';
-
 export interface IngredientInput {
   ingredient_id: string;
   quantity_g: number;
@@ -73,5 +71,3 @@ export interface AgentGuide {
   }>;
   key_concepts: Record<string, string>;
 }
-
-export { Ingredient };

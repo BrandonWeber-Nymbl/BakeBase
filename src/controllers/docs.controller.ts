@@ -6,7 +6,7 @@ export class DocsController {
    * GET /agents
    * Returns AI agent usage guide
    */
-  static getAgentGuide(req: Request, res: Response) {
+  static getAgentGuide(_req: Request, res: Response): void {
     const guide: AgentGuide = {
       api_name: 'BakeBase',
       version: '1.0.0',
@@ -81,7 +81,7 @@ export class DocsController {
    * GET /health
    * Health check endpoint
    */
-  static healthCheck(req: Request, res: Response) {
+  static healthCheck(_req: Request, res: Response): void {
     res.json({
       status: 'healthy',
       timestamp: new Date().toISOString(),

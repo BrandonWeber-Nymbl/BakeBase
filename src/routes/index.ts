@@ -13,7 +13,7 @@ router.get('/health', DocsController.healthCheck);
 router.get('/agents', DocsController.getAgentGuide);
 
 // OpenAPI spec
-router.get('/docs/openapi.json', (req, res) => {
+router.get('/docs/openapi.json', (_req, res) => {
   res.json(openApiSpec);
 });
 

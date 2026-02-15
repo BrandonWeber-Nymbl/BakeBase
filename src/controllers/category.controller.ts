@@ -9,7 +9,7 @@ export class CategoryController {
    * GET /categories
    * List all categories with counts and examples
    */
-  static async getAll(req: Request, res: Response) {
+  static async getAll(_req: Request, res: Response): Promise<any> {
     try {
       // Get all ingredients grouped by category
       const ingredients = await prisma.ingredient.findMany({
@@ -21,7 +21,7 @@ export class CategoryController {
 
       // Group by category
       const categoryMap = new Map<string, string[]>();
-      ingredients.forEach(ing => {
+      ingredients.forEach((ing: { category: string; name: string }) => {
         if (!categoryMap.has(ing.category)) {
           categoryMap.set(ing.category, []);
         }
