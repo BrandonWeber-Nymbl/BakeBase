@@ -89,6 +89,11 @@ export const agentManifest = {
     paid_tier: null,
     support_url: "https://github.com/AMProtocol/BakeBase"
   },
+  payment: {
+    prepay_required: false,
+    checkout_url: "https://bakebase.agent-manifest.com/dashboard/keys",
+    key_provisioning_url: "https://bakebase.agent-manifest.com/dashboard/keys"
+  },
   authentication: {
     required: true,
     type: "api_key",
