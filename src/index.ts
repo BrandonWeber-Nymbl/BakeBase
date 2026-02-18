@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import routes from './routes';
+import { agentManifest } from './config/agent-manifest';
 
 console.log('🚀 Starting BakeBase API...');
 
@@ -11,6 +12,15 @@ console.log('✓ Environment loaded');
 
 const app = express();
 const PORT = parseInt(process.env.PORT || '3000', 10);
+
+// Manifest MUST be at /.well-known/agent-manifest.json (AMP spec)
+// Serve at app level before other middleware for maximum compatibility with proxies
+const serveManifest = (_req: express.Request, res: express.Response) => {
+  res.setHeader('Content-Type', 'application/json');
+  res.json(agentManifest);
+};
+app.get('/.well-known/agent-manifest.json', serveManifest);
+app.get('/well-known/agent-manifest.json', serveManifest); // fallback if proxy strips leading dot
 
 // Middleware
 app.use(cors());

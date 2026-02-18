@@ -4,7 +4,6 @@ import { CategoryController } from '../controllers/category.controller';
 import { DocsController } from '../controllers/docs.controller';
 import { KeysController } from '../controllers/keys.controller';
 import { openApiSpec } from '../middleware/openapi';
-import { agentManifest } from '../config/agent-manifest';
 import { requireApiKey } from '../middleware/auth';
 import { keyProvisioningLimiter } from '../middleware/rateLimit';
 
@@ -32,11 +31,6 @@ router.get('/', (_req, res) => {
         'BakeBase root. If you are an AI agent, start at /agents for usage guidance or /ingredients to browse the ingredient database.',
     },
   });
-});
-
-// AgentManifest endpoint - MUST be served at /.well-known/agent-manifest.json
-router.get('/.well-known/agent-manifest.json', (_req, res) => {
-  res.json(agentManifest);
 });
 
 // Health check
