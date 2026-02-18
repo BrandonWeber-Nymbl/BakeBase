@@ -2,8 +2,11 @@ import { Router } from 'express';
 import { IngredientController } from '../controllers/ingredient.controller';
 import { CategoryController } from '../controllers/category.controller';
 import { DocsController } from '../controllers/docs.controller';
+import { KeysController } from '../controllers/keys.controller';
 import { openApiSpec } from '../middleware/openapi';
 import { agentManifest } from '../config/agent-manifest';
+import { requireApiKey } from '../middleware/auth';
+import { keyProvisioningLimiter } from '../middleware/rateLimit';
 
 const router = Router();
 
@@ -22,6 +25,7 @@ router.get('/', (_req, res) => {
       docs: '/docs/openapi.json',
       manifest: '/.well-known/agent-manifest.json',
       health: '/health',
+      api_keys: '/dashboard/keys',
     },
     meta: {
       description:
@@ -46,13 +50,16 @@ router.get('/docs/openapi.json', (_req, res) => {
   res.json(openApiSpec);
 });
 
-// Ingredients endpoints
-router.get('/ingredients/search', IngredientController.search);
-router.get('/ingredients/:id', IngredientController.getById);
-router.get('/ingredients', IngredientController.getAll);
-router.post('/ingredients/combine', IngredientController.combine);
+// Key provisioning (public - validator expects 200 from key_provisioning_url)
+router.get('/dashboard/keys', KeysController.getDashboard);
+router.post('/dashboard/keys', keyProvisioningLimiter, KeysController.createKey);
+router.post('/api/keys', keyProvisioningLimiter, KeysController.createKeyJson);
 
-// Categories
-router.get('/categories', CategoryController.getAll);
+// Protected endpoints (require API key)
+router.get('/ingredients/search', requireApiKey, IngredientController.search);
+router.get('/ingredients/:id', requireApiKey, IngredientController.getById);
+router.get('/ingredients', requireApiKey, IngredientController.getAll);
+router.post('/ingredients/combine', requireApiKey, IngredientController.combine);
+router.get('/categories', requireApiKey, CategoryController.getAll);
 
 export default router;

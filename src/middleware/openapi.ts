@@ -3,19 +3,21 @@ export const openApiSpec = {
   info: {
     title: 'BakeBase API',
     version: '1.0.0',
-    description: 'AI-first food science reference API for baking ingredients',
+    description: 'AI-first food science reference API for baking ingredients. API key required for all data endpoints. Generate keys at /dashboard/keys.',
     contact: {
-      name: 'BakeBase',
-      url: 'https://github.com/yourusername/bakebase'
+      name: 'Brandon',
+      url: 'https://github.com/AMProtocol/BakeBase',
+      email: 'brandon@agent-manifest.com'
     }
   },
+  security: [{ apiKey: [] }, { bearerAuth: [] }],
   servers: [
     {
       url: 'http://localhost:3000',
       description: 'Development server'
     },
     {
-      url: 'https://your-app.railway.app',
+      url: 'https://bakebase.agent-manifest.com',
       description: 'Production server'
     }
   ],
@@ -90,7 +92,8 @@ export const openApiSpec = {
                 }
               }
             }
-          }
+          },
+          '401': { description: 'Unauthorized - API key required' }
         }
       }
     },
@@ -118,6 +121,7 @@ export const openApiSpec = {
               }
             }
           },
+          '401': { description: 'Unauthorized - API key required' },
           '404': {
             description: 'Ingredient not found'
           }
@@ -147,7 +151,8 @@ export const openApiSpec = {
                 }
               }
             }
-          }
+          },
+          '401': { description: 'Unauthorized - API key required' }
         }
       }
     },
@@ -197,6 +202,7 @@ export const openApiSpec = {
               }
             }
           },
+          '401': { description: 'Unauthorized - API key required' },
           '400': {
             description: 'Invalid input'
           },
@@ -220,12 +226,27 @@ export const openApiSpec = {
                 }
               }
             }
-          }
+          },
+          '401': { description: 'Unauthorized - API key required' }
         }
       }
     }
   },
   components: {
+    securitySchemes: {
+      apiKey: {
+        type: 'apiKey',
+        in: 'header',
+        name: 'X-API-Key',
+        description: 'API key. Also accepted as Authorization: Bearer <key>'
+      },
+      bearerAuth: {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'API Key',
+        description: 'API key in Bearer format'
+      }
+    },
     schemas: {
       Ingredient: {
         type: 'object',

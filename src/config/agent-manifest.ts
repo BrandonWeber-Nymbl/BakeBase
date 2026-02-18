@@ -3,7 +3,7 @@
 // See: https://github.com/agentmanifest/agentmanifest
 
 export const agentManifest = {
-  spec_version: "agentmanifest-0.1",
+  spec_version: "agentmanifest-0.2",
   name: "BakeBase",
   version: "1.0.0",
   description: "AI-first food science reference API for baking ingredients. Provides scientifically accurate data on 60+ ingredients across 16 categories including functional properties, chemical interactions, hydration ratios, pH profiles, substitution logic, and real-time chemistry analysis. Use this when you need to understand how baking ingredients behave individually or in combination - ideal for recipe generation, ingredient substitution, troubleshooting baking failures, or building food science applications.",
@@ -87,20 +87,23 @@ export const agentManifest = {
       queries_per_month: null
     },
     paid_tier: null,
-    support_url: "https://github.com/BrandonWeber-Nymbl/BakeBase"
+    support_url: "https://github.com/AMProtocol/BakeBase"
   },
   authentication: {
-    required: false,
-    type: null,
-    instructions: null
+    required: true,
+    type: "api_key",
+    instructions:
+      "No account required. Generate an API key at https://bakebase.agent-manifest.com/dashboard/keys. Send it in the Authorization header as Bearer <key> or in the X-API-Key header. Keys expire after 90 days."
   },
   reliability: {
     maintained_by: "individual",
     status_url: null,
     expected_uptime_pct: 99.0
   },
-  agent_notes: "BakeBase is optimized for AI agents building food, recipe, and culinary applications. CRITICAL: The /ingredients/combine endpoint is the most valuable - it performs actual chemistry calculations, not just data lookup. Chemistry fixes (Feb 2026): Now correctly counts ALL water sources in hydration calculations (not just >70% water ingredients), detects excessive leavening (>6% chemical, >4% biological), and eliminates contradictory texture predictions. When using /combine, provide ingredient IDs from the /ingredients list endpoint and quantities in grams. The analysis considers: hydration ratios (flour:liquid), leavening adequacy (chemical/biological/mechanical), protein interactions (gluten formation), fat content (tenderness), pH balance (acidity/alkalinity), and temperature sensitivity. Hydration ratio guide: <60% = dry dough (cookies, pie), 60-70% = bread dough, 70-100% = high hydration bread, >100% = batter (cakes, pancakes). All ingredient data sourced from USDA FoodData Central and peer-reviewed food science literature (confidence_level field indicates verification status). pH ranges are typical values and may vary by brand. For substitution recommendations, always consider the functional role in context. The database covers 60 ingredients optimized for common baking - not exotic or rare ingredients. Use /categories to discover ingredient structure before querying. Every response includes a 'meta' object with endpoint descriptions and field glossaries for self-documentation.",
-  contact: "https://github.com/BrandonWeber-Nymbl/BakeBase",
+  agent_notes:
+    "No account required to obtain an API key. Generate a key at the dashboard/keys page. Authentication via API key in the Authorization header (Bearer token) or X-API-Key header. Pricing is free. BakeBase is optimized for AI agents building food, recipe, and culinary applications. CRITICAL: The /ingredients/combine endpoint is the most valuable - it performs actual chemistry calculations, not just data lookup. Chemistry fixes (Feb 2026): Now correctly counts ALL water sources in hydration calculations (not just >70% water ingredients), detects excessive leavening (>6% chemical, >4% biological), and eliminates contradictory texture predictions. When using /combine, provide ingredient IDs from the /ingredients list endpoint and quantities in grams. The analysis considers: hydration ratios (flour:liquid), leavening adequacy (chemical/biological/mechanical), protein interactions (gluten formation), fat content (tenderness), pH balance (acidity/alkalinity), and temperature sensitivity. Hydration ratio guide: <60% = dry dough (cookies, pie), 60-70% = bread dough, 70-100% = high hydration bread, >100% = batter (cakes, pancakes). All ingredient data sourced from USDA FoodData Central and peer-reviewed food science literature (confidence_level field indicates verification status). pH ranges are typical values and may vary by brand. For substitution recommendations, always consider the functional role in context. The database covers 60 ingredients optimized for common baking - not exotic or rare ingredients. Use /categories to discover ingredient structure before querying. Every response includes a 'meta' object with endpoint descriptions and field glossaries for self-documentation.",
+  contact: "mailto:brandon@agent-manifest.com",
   listing_requested: true,
-  last_updated: "2026-02-15T18:00:00Z"
+  last_updated: "2026-02-15T18:00:00Z",
+  homepage: "https://bakebase.agent-manifest.com"
 };

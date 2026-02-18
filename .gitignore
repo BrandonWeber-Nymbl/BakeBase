@@ -7,3 +7,8 @@ dist/
 coverage/
 .vscode/
 .idea/
+
+# Session/planning docs (internal notes, not for public repo)
+NEXT_SESSION_KICKOFF.md
+ROOT_ROUTE_FIX.md
+PROGRESS_REPORT.md

@@ -11,7 +11,8 @@ export class DocsController {
       api_name: 'BakeBase',
       version: '1.0.0',
       purpose: 'AI-first food science reference API focused on the functional properties of baking ingredients. Provides structured, scientifically accurate data about ingredient chemistry, interactions, and predicted baking outcomes.',
-      recommended_usage: 'Use BakeBase to understand ingredient functionality, calculate hydration ratios, predict texture outcomes, and analyze ingredient combinations before baking. The /combine endpoint is the most powerful feature - it performs real chemistry calculations and returns plain-language predictions suitable for AI agent interpretation.',
+      recommended_usage:
+        'API key required for all data endpoints. Get a key at /dashboard/keys (no account needed). Send it as Authorization: Bearer <key> or X-API-Key header. Use BakeBase to understand ingredient functionality, calculate hydration ratios, predict texture outcomes, and analyze ingredient combinations before baking. The /combine endpoint is the most powerful feature - it performs real chemistry calculations and returns plain-language predictions suitable for AI agent interpretation.',
       available_endpoints: [
         {
           path: 'GET /ingredients',
@@ -44,6 +45,12 @@ export class DocsController {
           when_to_use: 'Understand available ingredient types and their distribution in the database'
         },
         {
+          path: 'GET /dashboard/keys',
+          method: 'GET',
+          description: 'API key provisioning page',
+          when_to_use: 'Obtain an API key (no account required). Keys expire in 90 days. Required before calling /ingredients, /categories, or /combine.'
+        },
+        {
           path: 'GET /health',
           method: 'GET',
           description: 'Health check endpoint',
@@ -63,6 +70,8 @@ export class DocsController {
         }
       ],
       key_concepts: {
+        authentication:
+          'API key required. Get one at /dashboard/keys. Send as Authorization: Bearer <key> or X-API-Key header. No account required. Keys expire in 90 days.',
         hydration_ratio: 'The ratio of liquid to flour by weight. 70% hydration means 70g water per 100g flour. Critical for predicting dough consistency.',
         gluten_forming: 'Ingredients with proteins that form elastic networks when hydrated and mixed. Determines chewiness and structure.',
         leavening_type: 'How an ingredient creates rise: biological (yeast), chemical (baking powder/soda), mechanical (whipped eggs), or steam (water in butter).',

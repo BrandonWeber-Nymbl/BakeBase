@@ -59,3 +59,16 @@ model Ingredient {
   @@index([category])
   @@index([confidence_level])
 }
+
+model ApiKey {
+  id           String    @id @default(cuid())
+  key_prefix   String    // First 8 chars for display (e.g. "bake_abc1")
+  key_hash     String    @unique // SHA-256 hash of full key
+  created_at   DateTime  @default(now())
+  last_used_at DateTime?
+  expires_at   DateTime? // 90 days from creation
+  revoked_at   DateTime?
+
+  @@index([key_hash])
+  @@index([expires_at])
+}

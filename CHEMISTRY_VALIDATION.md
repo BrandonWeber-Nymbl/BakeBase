@@ -1,7 +1,7 @@
 # BakeBase Chemistry Feature Validation
 
 **Date:** February 15, 2026
-**API:** https://bakebase-production.up.railway.app
+**API:** https://bakebase.agent-manifest.com
 
 ## Executive Summary
 
